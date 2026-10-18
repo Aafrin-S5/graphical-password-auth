@@ -6,7 +6,7 @@ The project combines a web interface with a Python FastAPI backend and MySQL dat
 
 It mitigates brute-force attacks through temporary account lockout after three consecutive failed login attempts.
 
-🔗 Features
+## 🔗 Features
 
 🔗 Graphical Password Authentication
 
@@ -48,7 +48,7 @@ It mitigates brute-force attacks through temporary account lockout after three c
 - **WebP** — Image optimization
 - **Git and GitHub** — Version control and repository hosting
   
-🔗 Project Structure
+## 🔗 Project Structure
 
 ```text
 graphical-password-auth/
@@ -72,7 +72,7 @@ graphical-password-auth/
 └── .gitignore
 ```
 
-🔗 Prerequisites
+## 🔗 Prerequisites
 
 Before running the project, install:
 
@@ -82,7 +82,7 @@ Before running the project, install:
 - A modern web browser
 
 
-🔗 How to Run
+## 🔗 How to Run
 
 1- Clone the Repository
 
@@ -127,19 +127,19 @@ http://127.0.0.1:8001/docs
 Open the frontend using a local web server or the development setup supported by the project. Ensure the frontend API URL matches the backend address and port.
 
 
-🔗 Security Considerations
+## 🔗 Security Considerations
 
 - Keep database credentials in environment variables.
 - Exclude ".env" and virtual environment files from Git.
 - Implement appropriate password-storage and account-recovery safeguards before production deployment.
 - Test authentication, account locking, and password-reset behavior carefully.
 
-🔗 Future Improvements
+## 🔗 Future Improvements
 
 - Add automated API and authentication tests.
 - Strengthen password-reset verification.
 
-🔗 License
+## 🔗 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
