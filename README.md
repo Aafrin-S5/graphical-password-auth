@@ -15,13 +15,12 @@ It mitigates brute-force attacks through temporary account lockout after three c
 - Authenticate users by selecting the same images in the registered order.
 - Provide a visual interface for image selection.
 
-🔗 Image Optimization and Performance
-
+##🔗 Image Optimization and Performance
+      
+- Optimized all images before commiting.
+- Maximum file size:200KB for photos,100KB for screenshots
 - Converted authentication images to WebP format.
-- Compressed image files to reduce file sizes.
-- Optimized image assets to support faster loading.
-- Improved image-loading performance through image optimization.
-- Organized images in a dedicated frontend images directory.
+- Optimized image assets to support optimal website loading.
 
 🔗 Account and Password Management
 
