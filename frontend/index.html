@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphical Password Authentication</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #eeeeee;
+            color: #111111;
+            font-family: "Segoe UI", Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 35px 20px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 1100px;
+            text-align: center;
+        }
+
+        .eyebrow {
+            font-size: 12px;
+            letter-spacing: 4px;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            font-size: clamp(28px, 4vw, 46px);
+            font-weight: 750;
+            letter-spacing: -1.5px;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            max-width: 500px;
+            margin: 0 auto;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #666666;
+        }
+
+        /* Three-card layout */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 28px;
+            align-items: center;
+            margin: 55px auto 30px;
+            max-width: 1000px;
+        }
+
+        .auth-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            text-decoration: none;
+            color: #111111;
+            background: #fafafa;
+            border: 1px solid #d6d6d6;
+            border-radius: 22px;
+            overflow: hidden;
+            min-height: 355px;
+
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.10);
+
+            transform: translateY(0) scale(1);
+            transition:
+                transform 0.35s ease,
+                box-shadow 0.35s ease,
+                border-color 0.35s ease;
+
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Black header with a smooth wave */
+
+        .card-top {
+            position: relative;
+            min-height: 155px;
+            padding: 25px 22px;
+            background: #080808;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        .card-top::after {
+            content: "";
+            position: absolute;
+            width: 125%;
+            height: 95px;
+            left: -12%;
+            bottom: -62px;
+            background: #fafafa;
+            border-radius: 50% 48% 0 0;
+            transform: rotate(-7deg);
+        }
+
+        .card-number {
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: #bdbdbd;
+        }
+
+        .card-icon {
+            font-size: 29px;
+            margin-top: 25px;
+        }
+
+        .card-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 24px 22px;
+        }
+
+        .card-body h2 {
+            font-size: 23px;
+            margin-bottom: 12px;
+        }
+
+        .card-body p {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #666666;
+            margin-bottom: 25px;
+        }
+
+        .card-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-top: auto;
+            background: #111111;
+            color: #ffffff;
+            padding: 13px 15px;
+            border-radius: 9px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .arrow {
+            font-size: 18px;
+        }
+
+        /* Selected card effect */
+
+
+        .auth-card.active {
+            transform: translateY(-16px) scale(1.05);
+            border-color: #222222;
+            box-shadow: 0 28px 45px rgba(0, 0, 0, 0.20);
+            z-index: 5;
+        }
+
+        .auth-card.active .card-top {
+            background: #000000;
+        }
+
+        .hint {
+            font-size: 12px;
+            color: #777777;
+            letter-spacing: 0.3px;
+        }
+
+        /* Keyboard accessibility */
+
+        .auth-card:focus-visible {
+            outline: 3px solid #555555;
+            outline-offset: 5px;
+        }
+
+        /* Mobile responsive */
+
+        @media (max-width: 760px) {
+            .cards {
+                grid-template-columns: 1fr;
+                max-width: 390px;
+                gap: 22px;
+                margin-top: 38px;
+            }
+
+            .auth-card {
+                min-height: 320px;
+            }
+
+            .card-top {
+                min-height: 135px;
+            }
+
+            .auth-card.active {
+                transform: translateY(-5px) scale(1.015);
+            }
+
+            body {
+                padding: 35px 18px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .auth-card {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="page">
+
+        <div class="eyebrow">GRAPHICAL SECURITY</div>
+
+        <h1>Your Images.<br>Your Identity.</h1>
+
+        <p class="subtitle">
+            A different way to authenticate.
+            Choose an option to continue securely.
+        </p>
+
+        <section class="cards" aria-label="Authentication options">
+
+            <!-- Register -->
+
+            <a href="register.html"
+               class="auth-card active"
+               data-card="register">
+
+                <div class="card-top">
+                    <div class="card-number">01 / REGISTER</div>
+                    <div class="card-icon">＋</div>
+                </div>
+
+                <div class="card-body">
+                    <h2>Register</h2>
+
+                    <p>
+                        Create your account and choose your
+                        unique graphical password sequence.
+                    </p>
+
+                    <span class="card-action">
+                        Create account <span class="arrow">→</span>
+                    </span>
+                </div>
+            </a>
+
+            <!-- Login -->
+
+            <a href="login.html"
+               class="auth-card"
+               data-card="login">
+
+                <div class="card-top">
+                    <div class="card-number">02 / LOGIN</div>
+                    <div class="card-icon">↗</div>
+                </div>
+
+                <div class="card-body">
+                    <h2>Login</h2>
+
+                    <p>
+                        Access your account by selecting
+                        your saved images in the correct order.
+                    </p>
+
+                    <span class="card-action">
+                        Sign in <span class="arrow">→</span>
+                    </span>
+                </div>
+            </a>
+
+            <!-- Change Password -->
+
+                    
+    <a href="forgot-password.html"
+   class="auth-card"
+   data-card="forgot-password">
+
+    <div class="card-top">
+        <div class="card-number">03 / RECOVERY</div>
+        <div class="card-icon">↻</div>
+    </div>
+
+    <div class="card-body">
+        <h2>Forgot Password?</h2>
+
+        <p>
+            Reset your graphical password and regain
+            access to your account.
+        </p>
+
+        <span class="card-action">
+            Reset password <span class="arrow">→</span>
+        </span>
+    </div>
+</a>
+
+        </section>
+
+        <p class="hint">
+            Select a card to highlight it. Choose again to continue.
+        </p>
+
+    </main>
+
+    <script>
+        const cards = document.querySelectorAll(".auth-card");
+
+        cards.forEach(function (card) {
+
+            card.addEventListener("click", function (event) {
+
+                if (!card.classList.contains("active")) {
+                    event.preventDefault();
+
+                    cards.forEach(function (item) {
+                        item.classList.remove("active");
+                    });
+
+                    card.classList.add("active");
+                }
+            });
+
+            card.addEventListener("pointerenter", function () {
+                cards.forEach(function (item) {
+                    item.classList.remove("active");
+                });
+
+                card.classList.add("active");
+            });
+        });
+    </script>
+
+</body>
+</html>

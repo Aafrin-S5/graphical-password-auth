@@ -1,0 +1,336 @@
+/*
+   GLOBAL STYLES
+*/
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+/*  BUTTONS*/
+
+button {
+    padding: 12px 25px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    max-width: 100%;
+}
+
+#save-btn {
+    display: none;
+    padding: 12px 24px;
+    margin-top: 20px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#save-btn:hover {
+    transform: scale(1.05);
+}
+
+#login-btn {
+    display: none;
+    padding: 12px 24px;
+    margin: 20px auto;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#login-btn:hover {
+    transform: scale(1.05);
+}
+
+#login-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/*Register / Login */
+
+#image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 700px;
+    margin: 20px auto;
+}
+
+.image-box {
+    display: block;
+    width: 120px;
+    height: 120px;
+    flex: 0 0 120px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 4px solid transparent;
+    border-radius: 10px;
+}
+
+.image-box.selected {
+    border: 4px solid green;
+}
+
+#message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#password-preview {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.preview-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #555;
+}
+
+#forgot-password {
+    color: #60a5fa;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* FORGOT PASSWORD PAGE */
+
+.forgot-password-container {
+    width: 100%;
+    max-width: 460px;
+    margin: 35px auto;
+    padding: 28px;
+    background: #fff;
+    color: #26304a;
+    border-radius: 16px;
+    box-shadow: 0 8px 28px rgba(31, 41, 80, 0.12);
+}
+
+.forgot-password-container h2 {
+    text-align: center;
+    color: #6236d9;
+    margin: 0 0 10px;
+}
+
+.forgot-password-container .intro {
+    color: #667085;
+    line-height: 1.6;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #26304a;
+}
+
+.form-group input[type="email"] {
+    display: block;
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    border: 1px solid #cbd2e1;
+    border-radius: 9px;
+    background: #fff;
+    color: #202943;
+    font-size: 15px;
+    outline: none;
+}
+
+.form-group input[type="email"]:focus {
+    border-color: #6236d9;
+    box-shadow: 0 0 0 3px rgba(98, 54, 217, 0.12);
+}
+
+.image-section h3 {
+    font-size: 17px;
+    color: #26304a;
+    margin-bottom: 6px;
+}
+
+.image-section > p {
+    color: #667085;
+    line-height: 1.6;
+    margin-top: 5px;
+}
+
+/* Forgot Password image grid only */
+.forgot-password-container #image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+    max-width: 100%;
+    margin: 18px 0;
+}
+
+/* Override the general image size only on this page */
+.forgot-password-container #image-grid .image-box {
+    width: 100%;
+    height: auto;
+    min-width: 0;
+    aspect-ratio: 1 / 1;
+    flex: initial;
+    object-fit: cover;
+    border: 3px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.forgot-password-container #image-grid .image-box:hover {
+    transform: translateY(-2px);
+}
+
+.forgot-password-container #image-grid .image-box.selected {
+    border: 3px solid #6236d9;
+    box-shadow: 0 0 0 2px rgba(98, 54, 217, 0.15);
+}
+
+#selected-count {
+    font-weight: 600;
+    color: #26304a;
+}
+
+/* Selected sequence preview */
+.forgot-password-container #password-preview {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin: 12px 0 20px;
+}
+
+.forgot-password-container #password-preview .preview-image {
+    width: 100%;
+    height: 65px;
+    min-width: 0;
+    object-fit: cover;
+    border: 2px solid #6236d9;
+    border-radius: 9px;
+}
+
+#reset-btn {
+    width: 100%;
+    min-height: 46px;
+    margin: 0;
+    padding: 12px;
+    border: none;
+    border-radius: 9px;
+    background: #6236d9;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#reset-btn:disabled {
+    background: #c5cada;
+    cursor: not-allowed;
+}
+
+.forgot-password-container .message {
+    text-align: center;
+    color: #b42318;
+    font-size: 14px;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #6236d9;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 600px) {
+    body {
+        padding: 12px;
+    }
+
+    .container {
+        margin: 25px auto;
+    }
+
+    #image-grid {
+        gap: 10px;
+    }
+
+    .image-box {
+        width: 95px;
+        height: 95px;
+        flex-basis: 95px;
+    }
+
+    button {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
+    .preview-image {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+@media (max-width: 480px) {
+    .forgot-password-container {
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    .forgot-password-container #image-grid {
+        gap: 8px;
+    }
+}

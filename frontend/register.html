@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Graphical Security</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            background: #eeeeee;
+            color: #111111;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        .register-page {
+            width: 100%;
+            max-width: 1460px;
+            min-height: 700px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+        }
+
+        /* LEFT SIDE */
+
+        .register-left {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 45px 8%;
+            background: #f7f7f7;
+            overflow: hidden;
+        }
+
+        .eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            margin-bottom: 22px;
+        }
+
+        .register-left h1 {
+            margin: 0 0 18px;
+            font-size: clamp(32px, 3.2vw, 50px);
+            line-height: 1.13;
+            letter-spacing: -1.5px;
+        }
+
+        .intro-text {
+            max-width: 420px;
+            margin: 0;
+            color: #606773;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .image-preview-area {
+            width: 100%;
+            max-width: 410px;
+            margin: 25px auto;
+        }
+
+        .image-grid-preview {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            padding: 14px;
+            background: #ffffff;
+            border: 1px solid #e8e8e8;
+            border-radius: 17px;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+        }
+
+        .preview-tile {
+            position: relative;
+            aspect-ratio: 1;
+            min-width: 0;
+        }
+
+        .preview-tile img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            filter: grayscale(100%);
+        }
+
+        .tile-number {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 24px;
+            height: 24px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: #111111;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .image-caption {
+            margin: 12px 0 0;
+            text-align: center;
+            color: #666666;
+            font-size: 12px;
+        }
+
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin: 5px 0 25px;
+        }
+
+        .benefit {
+            min-width: 0;
+            padding-right: 8px;
+        }
+
+        .benefit:not(:last-child) {
+            border-right: 1px solid #dddddd;
+        }
+
+        .benefit-icon {
+            width: 36px;
+            height: 36px;
+            margin-bottom: 9px;
+            display: grid;
+            place-items: center;
+            border: 1px solid #bcbcbc;
+            border-radius: 50%;
+        }
+
+        .benefit-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: #111111;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .benefit h3 {
+            margin: 0 0 6px;
+            font-size: 14px;
+        }
+
+        .benefit p {
+            margin: 0;
+            color: #68707a;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .signin-prompt {
+            position: relative;
+            z-index: 2;
+            margin-top: auto;
+            padding-top: 18px;
+            text-align: right;
+            font-size: 13px;
+            color: #69707a;
+        }
+
+        .signin-prompt a {
+            margin-left: 8px;
+            color: #111111;
+            font-weight: 700;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .bottom-waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 75px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bottom-waves svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* RIGHT SIDE */
+
+        .register-right {
+            display: block;
+            min-width: 0;
+            padding: 45px clamp(24px, 4vw, 60px);
+            background: #ffffff;
+            color: #111111;
+        }
+
+        .progress {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 42px;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            flex-shrink: 0;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .step-number {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: #080808;
+            color: #ffffff;
+            font-size: 13px;
+        }
+
+        .step-number.inactive {
+            background: #eeeeee;
+            color: #333333;
+        }
+
+        .step-label.inactive {
+            color: #8a8f98;
+            font-weight: 400;
+        }
+
+        .progress-line {
+            flex: 1;
+            min-width: 8px;
+            height: 1px;
+            background: #dddddd;
+        }
+
+        .register-right h2 {
+            margin: 0 0 10px;
+            font-size: clamp(30px, 3vw, 42px);
+            letter-spacing: -1px;
+        }
+
+        .form-description {
+            margin: 0 0 28px;
+            color: #606773;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        .field label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333333;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .input-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            min-height: 55px;
+            padding: 0 15px;
+            border: 1px solid #d6d9de;
+            border-radius: 11px;
+            background: #ffffff;
+        }
+
+        .input-wrap:focus-within {
+            border-color: #555555;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .input-wrap svg {
+            width: 21px;
+            height: 21px;
+            flex-shrink: 0;
+            fill: none;
+            stroke: #343a40;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .input-wrap input {
+            display: block;
+            width: 100%;
+            min-width: 0;
+            min-height: 45px;
+            padding: 8px 0;
+            border: 0;
+            outline: none;
+            background: transparent;
+            color: #111111;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .input-wrap input::placeholder {
+            color: #626b77;
+            opacity: 1;
+        }
+
+        .field-hint {
+            margin: 7px 0 0 33px;
+            color: #777f89;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .privacy-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin: 22px 0;
+            padding: 15px;
+            border-radius: 11px;
+            background: #f2f3f4;
+            color: #555e69;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .privacy-note svg {
+            width: 21px;
+            height: 21px;
+            flex-shrink: 0;
+            fill: none;
+            stroke: #414851;
+            stroke-width: 1.8;
+        }
+
+        .continue-btn {
+            display: block;
+            width: 100%;
+            min-height: 30px;
+            margin: 0;
+            padding: 8px 12px;
+            border: 0;
+            border-radius: 8px;
+            background: #111111;
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .continue-btn:hover {
+            background: #303030;
+            transform: translateY(-1px);
+        }
+
+        .terms-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            margin: 18px 0 0;
+            color: #707782;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        /* TABLET */
+
+        @media (max-width: 900px) {
+            body {
+                padding: 12px;
+            }
+
+            .register-page {
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            }
+
+            .register-left {
+                padding: 32px 22px;
+            }
+
+            .register-right {
+                padding: 32px 22px;
+            }
+
+            .progress {
+                gap: 7px;
+                margin-bottom: 32px;
+            }
+
+            .progress-step {
+                gap: 6px;
+                font-size: 10px;
+            }
+
+            .step-number {
+                width: 32px;
+                height: 32px;
+            }
+
+            .image-grid-preview {
+                gap: 8px;
+                padding: 10px;
+            }
+        }
+
+        /* MOBILE: form appears BELOW the left panel */
+
+        @media (max-width: 650px) {
+            body {
+                padding: 10px;
+            }
+
+            .register-page {
+                grid-template-columns: minmax(0, 1fr);
+                min-height: auto;
+                overflow: visible;
+            }
+
+            .register-left {
+                padding: 30px 22px 25px;
+            }
+
+            .register-left h1 {
+                font-size: 36px;
+            }
+
+            .image-preview-area {
+                max-width: 360px;
+            }
+
+            .benefits {
+                gap: 9px;
+            }
+
+            .benefit {
+                padding-right: 6px;
+            }
+
+            .signin-prompt {
+                margin-top: 18px;
+                text-align: left;
+            }
+
+            .bottom-waves {
+                height: 55px;
+            }
+
+            .register-right {
+                display: block;
+                width: 100%;
+                padding: 30px 22px;
+                border-top: 1px solid #eeeeee;
+            }
+
+            .progress {
+                margin-bottom: 30px;
+            }
+
+            .register-right h2 {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 370px) {
+            .register-left,
+            .register-right {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .progress {
+                gap: 5px;
+            }
+
+            .progress-step {
+                gap: 4px;
+                font-size: 9px;
+            }
+
+            .step-number {
+                width: 28px;
+                height: 28px;
+                font-size: 11px;
+            }
+
+            .image-grid-preview {
+                gap: 6px;
+                padding: 8px;
+            }
+
+            .benefit h3 {
+                font-size: 12px;
+            }
+
+            .benefit p {
+                font-size: 10px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="register-page">
+
+    <!-- LEFT PANEL -->
+
+    <section class="register-left">
+
+        <div class="eyebrow">GRAPHICAL SECURITY</div>
+
+        <h1>Your Images.<br>Your Identity.</h1>
+
+        <p class="intro-text">
+            Create your account and set up your graphical
+            password. A simple, secure and unique way
+            to protect your identity.
+        </p>
+
+        <div class="image-preview-area">
+
+            <div class="image-grid-preview">
+
+                <div class="preview-tile">
+                    <img src="images/1.webp" alt="Image 1 preview">
+                    <span class="tile-number">1</span>
+                </div>
+
+                <div class="preview-tile">
+                    <img src="images/2.webp" alt="Image 2 preview">
+                    <span class="tile-number">2</span>
+                </div>
+
+                <div class="preview-tile">
+                    <img src="images/3.webp" alt="Image 3 preview">
+                    <span class="tile-number">3</span>
+                </div>
+
+                <div class="preview-tile">
+                    <img src="images/4.webp" alt="Image 4 preview">
+                    <span class="tile-number">4</span>
+                </div>
+
+                <div class="preview-tile">
+                    <img src="images/5.webp" alt="Image 5 preview">
+                    <span class="tile-number">5</span>
+                </div>
+
+                <div class="preview-tile">
+                    <img src="images/6.webp" alt="Image 6 preview">
+                    <span class="tile-number">6</span>
+                </div>
+
+            </div>
+
+            <p class="image-caption">
+                Choose 3 images in your own order
+            </p>
+
+        </div>
+
+        <div class="benefits">
+
+            <div class="benefit">
+                <div class="benefit-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 3 19 6v5c0 4.5-3 7.8-7 10-4-2.2-7-5.5-7-10V6z"/>
+                    </svg>
+                </div>
+                <h3>Secure</h3>
+                <p>Your data stays protected.</p>
+            </div>
+
+            <div class="benefit">
+                <div class="benefit-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                </div>
+                <h3>Unique</h3>
+                <p>Only you know your sequence.</p>
+            </div>
+
+            <div class="benefit">
+                <div class="benefit-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M13 2 4 14h7l-1 8 10-13h-7z"/>
+                    </svg>
+                </div>
+                <h3>Simple</h3>
+                <p>Just a few steps to get started.</p>
+            </div>
+
+        </div>
+
+        <div class="signin-prompt">
+            Already have an account?
+            <a href="login.html">Sign in →</a>
+        </div>
+
+        <div class="bottom-waves" aria-hidden="true">
+            <svg viewBox="0 0 700 100" preserveAspectRatio="none">
+                <path d="M0 18 C110 35 130 75 280 75 S510 100 700 85 L700 100 L0 100 Z"
+                      fill="#e1e1e1"/>
+                <path d="M0 35 C110 65 160 72 300 83 S540 94 700 100 L0 100 Z"
+                      fill="#555555"/>
+                <path d="M0 56 C110 77 190 81 320 91 S540 100 700 100 L0 100 Z"
+                      fill="#111111"/>
+            </svg>
+        </div>
+
+    </section>
+
+    <!-- RIGHT PANEL: REGISTER FORM -->
+
+    <section class="register-right">
+
+        <div class="progress" aria-label="Registration progress">
+
+            <div class="progress-step">
+                <span class="step-number">01</span>
+                <span>Account Details</span>
+            </div>
+
+            <div class="progress-line"></div>
+
+            <div class="progress-step">
+                <span class="step-number inactive">02</span>
+                <span class="step-label inactive">Image Password</span>
+            </div>
+
+        </div>
+
+        <h2>Register</h2>
+
+        <p class="form-description">
+            Fill in your details to create your account.
+        </p>
+
+        <form id="register-form" onsubmit="return false;">
+
+            <div class="field">
+                <label for="username">Full Name</label>
+
+                <div class="input-wrap">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M4 21v-2a8 8 0 0 1 16 0v2z"/>
+                    </svg>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="fullName"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        maxlength="100"
+                        required
+                    >
+                </div>
+
+                <p class="field-hint">Enter your full name.</p>
+            </div>
+
+            <div class="field">
+                <label for="email">Email Address</label>
+
+                <div class="input-wrap">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="5" width="18" height="14" rx="2"/>
+                        <path d="m4 7 8 6 8-6"/>
+                    </svg>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email address"
+                        autocomplete="email"
+                        maxlength="254"
+                        required
+                    >
+                </div>
+
+                <p class="field-hint">Enter a valid email address.</p>
+            </div>
+
+            <div class="field">
+                <label for="optionalUsername">
+                    Username <span style="font-weight: 400;">(Optional)</span>
+                </label>
+
+                <div class="input-wrap">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M4 21v-2a8 8 0 0 1 16 0v2z"/>
+                    </svg>
+
+                    <input
+                        type="text"
+                        id="optionalUsername"
+                        name="optionalUsername"
+                        placeholder="Choose a username"
+                        maxlength="30"
+                        autocomplete="off"
+                    >
+                </div>
+
+                <p class="field-hint">
+                    Optional — your account uses your full name and email.
+                </p>
+            </div>
+
+            <div class="privacy-note">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="5" y="10" width="14" height="11" rx="2"/>
+                    <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+                    <circle cx="12" cy="15" r="1"/>
+                </svg>
+
+                <span>
+                    Your graphical password will be created in the next step.
+                    Choose three images in the order you can remember.
+                </span>
+            </div>
+
+            <button
+                type="button"
+                class="continue-btn"
+                onclick="goToSetupPage()"
+                >
+                <h3>Continue →</h3>
+            </button>
+        </button>
+
+            <p class="terms-note">
+                By continuing, you proceed to graphical password setup.
+            </p>
+
+        </form>
+
+    </section>
+
+</main>
+
+<!-- Keep your existing JavaScript file -->
+<script src="script.js"></script>
+
+</body>
+</html>

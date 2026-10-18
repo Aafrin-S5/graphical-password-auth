@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graphical Security | Login</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --paper: #f1f1ef;
+      --white: #fff;
+      --ink: #101010;
+      --muted: #777773;
+      --line: #deded8;
+      --navy: #111820;
+      --blue: #2563eb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Manrope", sans-serif;
+      padding: 30px 24px;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1240px;
+      margin: auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1.5px solid var(--ink);
+      font-family: "DM Mono", monospace;
+    }
+
+    .top-meta {
+      font-family: "DM Mono", monospace;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 1.4px;
+      text-align: right;
+      line-height: 1.8;
+    }
+
+    .main-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: visible;
+      box-shadow: 0 18px 55px rgba(0,0,0,.045);
+    }
+
+    /* HERO SECTION */
+
+    .hero {
+      padding: 30px 34px 26px;
+      background: #f8f8f6;
+    }
+
+    .eyebrow,
+    .section-index,
+    .auth-index {
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      color: #52524e;
+      margin-bottom: 10px;
+    }
+
+    .hero-heading {
+      font-size: clamp(25px, 3.4vw, 42px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1.8px;
+      margin-bottom: 10px;
+    }
+
+    .hero-description {
+      max-width: 610px;
+      color: #666661;
+      font-size: 13px;
+      line-height: 1.8;
+      margin-bottom: 25px;
+    }
+
+    .image-frame {
+      border: 1px solid var(--ink);
+      padding: 9px;
+      background: #ededeb;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-rows: repeat(2, 135px);
+      gap: 8px;
+    }
+
+    .hero-tile {
+      position: relative;
+      overflow: hidden;
+      background: #dededb;
+      border: 1px solid #b9b9b4;
+    }
+
+    .hero-tile img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.08);
+    }
+
+    .tile-number {
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      background: rgba(255,255,255,.94);
+      border: 1px solid #333;
+      padding: 4px 6px;
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+    }
+
+    .image-caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+      color: #62625d;
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .secure-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 15px;
+      background: var(--white);
+      border: 1px solid var(--ink);
+      border-radius: 65px;
+      box-shadow: 3px 3px 0 #898383;
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border: 1px solid var(--ink);
+      background: #c9c9c5;
+      border-radius: 50%;
+    }
+
+    /* ACCOUNT SECTION */
+
+    .account-section {
+      padding: 34px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 230px;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .section-index {
+      color: #686862;
+      margin-bottom: 9px;
+    }
+
+    .account-title {
+      font-size: clamp(22px, 2.8vw, 30px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+
+    .account-description {
+      color: #74746e;
+      font-size: 12px;
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .field-card {
+      border: 1px solid var(--line);
+      min-width: 0;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .field-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 13px;
+      border-bottom: 1px solid var(--line);
+      background: #f7f7f5;
+    }
+
+    .field-heading label {
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 1.1px;
+    }
+
+    .field-number {
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      color: #666;
+    }
+
+    .input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 12px;
+      min-height: 51px;
+    }
+
+    .input-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      color: #30302d;
+    }
+
+    .input-icon svg {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+    }
+
+    .input-wrap input {
+      width: 100%;
+      min-width: 0;
+      border: 0;
+      outline: none;
+      color: var(--ink);
+      background: transparent;
+      font: 500 12px "Manrope", sans-serif;
+    }
+
+    .input-wrap input::placeholder {
+      color: #a1a19a;
+    }
+
+    .field-card:focus-within {
+      outline: 2px solid var(--blue);
+      outline-offset: 2px;
+    }
+
+    .account-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 20px;
+      padding: 13px 15px;
+      background: #f5f5f2;
+      border-left: 2px solid var(--ink);
+      color: #666660;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .note-symbol {
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      color: #111;
+    }
+
+    /* SECURITY GRAPHIC */
+
+    .security-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 235px;
+      position: relative;
+    }
+
+    .orbit {
+      width: 205px;
+      height: 205px;
+      border: 1px solid #171717;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .orbit::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px dashed #777;
+      border-radius: 50%;
+    }
+
+    .orbit::after {
+      content: "";
+      position: absolute;
+      width: 235px;
+      height: 1px;
+      background: #171717;
+      transform: rotate(-45deg);
+      opacity: .6;
+    }
+
+    .orbit-inner {
+      width: 128px;
+      height: 128px;
+      border: 1px solid var(--ink);
+      background: #f8f8f6;
+      display: grid;
+      place-items: center;
+      z-index: 1;
+    }
+
+    .orbit-inner svg {
+      width: 65px;
+      height: 65px;
+      fill: none;
+      stroke: #111;
+      stroke-width: 1.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .orbit-label {
+      position: absolute;
+      right: -7px;
+      bottom: 25px;
+      padding: 7px 9px;
+      border: 1px solid var(--ink);
+      background: white;
+      font-family: "DM Mono", monospace;
+      font-size: 8px;
+      letter-spacing: 1px;
+      z-index: 2;
+    }
+
+    .orbit-point {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #111;
+      border: 2px solid #fff;
+      outline: 1px solid #111;
+      border-radius: 50%;
+      z-index: 2;
+    }
+
+    .point-one {
+      top: 22px;
+      right: 35px;
+    }
+
+    .point-two {
+      bottom: 35px;
+      left: 22px;
+    }
+
+    /* AUTHENTICATION BANNER */
+
+    .auth-banner {
+      background: var(--navy);
+      color: #fff;
+      padding: 24px 34px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .auth-index {
+      color: #c2c2bd;
+      margin-bottom: 8px;
+    }
+
+    .auth-title {
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 800;
+      letter-spacing: -.7px;
+    }
+
+    .auth-description {
+      margin-top: 7px;
+      color: #b9b9b4;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .auth-mark {
+      flex-shrink: 0;
+      width: 53px;
+      height: 53px;
+      border: 1px solid #858781;
+      display: grid;
+      place-items: center;
+      font-family: "DM Mono", monospace;
+      font-size: 14px;
+      color: #fff;
+      transform: rotate(45deg);
+    }
+
+    .auth-mark span {
+      transform: rotate(-45deg);
+    }
+
+    /* GRAPHICAL PASSWORD SECTION */
+
+    .login-panel {
+      padding: 34px;
+    }
+
+    .login-heading {
+      margin-bottom: 24px;
+    }
+
+    .login-heading .account-description {
+      margin-bottom: 0;
+      max-width: 680px;
+    }
+
+    /* Separate preview card */
+
+    .selection-card {
+      padding: 26px;
+      border: 1px solid #e3e3dd;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #fbfbf9 0%, #f4f4f0 100%);
+      box-shadow: 0 10px 28px rgba(17,24,32,.045);
+      margin-bottom: 34px;
+      position:sticky;
+      top:10px;
+      z-index:100;
+    }
+
+    .selection-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .selection-card-title {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -.4px;
+    }
+
+    .selection-card-subtitle {
+      color: #777773;
+      font-size: 11px;
+      line-height: 1.6;
+      margin-top: 5px;
+    }
+
+    #selected-count {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid #d8d8d1;
+      background: #fff;
+      border-radius: 999px;
+      padding: 9px 12px;
+      font: 11px "DM Mono", monospace;
+      color: #454540;
+      white-space: nowrap;
+    }
+
+    #selected-count::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #a5a59c;
+    }
+
+    .password-preview {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .preview-slot {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      flex: 0 0 140px;
+      border: 1px solid #d6d6cf;
+      background: #fff;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,.035);
+    }
+
+    .preview-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .slot-number {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      min-width: 27px;
+      text-align: center;
+      padding: 5px 7px;
+      background: rgba(255,255,255,.96);
+      color: #111;
+      border: 1px solid #d2d2cb;
+      border-radius: 7px;
+      font: 10px "DM Mono", monospace;
+    }
+
+    .empty-slot {
+      font: 10px "DM Mono", monospace;
+      color: #888880;
+    }
+
+    /* Instruction block: no divider line */
+
+    .gallery-intro {
+      margin: 0 0 22px;
+      padding: 0 2px;
+    }
+
+    .gallery-intro .section-label {
+      display: inline-block;
+      font: 10px "DM Mono", monospace;
+      letter-spacing: 2px;
+      color: #777;
+      margin-bottom: 10px;
+    }
+
+    .gallery-intro h3 {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 800;
+      letter-spacing: -.8px;
+      line-height: 1.2;
+      margin: 0 0 12px;
+      color: #171717;
+    }
+
+    .gallery-intro p {
+      max-width: 680px;
+      font-size: 13px;
+      line-height: 1.8;
+      color: #686868;
+      margin: 0;
+    }
+
+    .gallery-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+      padding-top: 18px;
+      border-top: 1px solid #edede8;
+    }
+
+    /* 8 columns on desktop */
+
+    .login-image-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 13px;
+      margin: 0 0 20px;
+    }
+
+    .image-box {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border: 2px solid transparent;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: border-color .16s ease, transform .16s ease, box-shadow .16s ease;
+      background: #f0f0ec;
+    }
+
+    .image-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(0,0,0,.1);
+    }
+
+    /*.image-box.selected {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+      transform: translateY(-2px);
+    }*/
+
+    .image-box.selected {
+  border: 4px solid #2563eb;
+  box-shadow:
+    0 0 0 4px rgba(37, 99, 235, 0.22),
+    0 8px 20px rgba(37, 99, 235, 0.25);
+  transform: scale(0.96);
+  filter: brightness(0.82);
+  position: relative;
+}
+
+    .image-box:focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 3px;
+    }
+
+    .image-box.image-error {
+      object-fit: contain;
+      border: 1px dashed #b5364d;
+    }
+
+    #message {
+      min-height: 22px;
+      margin: 12px 0;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #b5364d;
+    }
+
+    #login-btn {
+      width: 100%;
+      padding: 15px 18px;
+      border: 1px solid #111;
+      border-radius: 8px;
+      background: #111820;
+      color: white;
+      font: 700 12px "Manrope", sans-serif;
+      cursor: pointer;
+      transition: background .15s ease;
+    }
+
+    #login-btn:hover {
+      background: #252c32;
+    }
+
+    #login-btn:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    .forgot-link {
+      display: block;
+      margin-top: 16px;
+      color: #333;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: #85857e;
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 1px;
+      padding: 18px 2px 0;
+      text-transform: uppercase;
+    }
+
+    /* TABLET */
+
+    @media (max-width: 1000px) {
+      .login-image-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+      }
+
+      .preview-slot {
+        width: 125px;
+        height: 125px;
+        flex-basis: 125px;
+      }
+    }
+
+    @media (max-width: 850px) {
+      body {
+        padding: 20px 14px;
+      }
+
+      .hero, .account-section {
+        padding: 25px 22px;
+      }
+
+      .hero-grid {
+        grid-template-rows: repeat(2, 105px);
+        gap: 6px;
+      }
+
+      .account-section {
+        grid-template-columns: 1fr;
+      }
+
+      .security-visual {
+        min-height: 200px;
+      }
+
+      .orbit {
+        width: 175px;
+        height: 175px;
+      }
+
+      .orbit::after {
+        width: 200px;
+      }
+
+      .orbit-inner {
+        width: 110px;
+        height: 110px;
+      }
+
+      .login-image-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .login-panel {
+        padding: 28px 22px;
+      }
+
+      .selection-card {
+        padding: 22px;
+      }
+
+      .preview-slot {
+        width: 120px;
+        height: 120px;
+        flex-basis: 120px;
+      }
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 560px) {
+      body {
+        padding: 12px 9px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+      }
+
+      .brand {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+      }
+
+      .top-meta {
+        font-size: 8px;
+        line-height: 1.6;
+      }
+
+      .hero {
+        padding: 23px 15px 20px;
+      }
+
+      .hero-heading {
+        letter-spacing: -1px;
+      }
+
+      .hero-description {
+        font-size: 11px;
+      }
+
+      .hero-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(4, 110px);
+        gap: 6px;
+      }
+
+      .image-caption {
+        font-size: 7px;
+        letter-spacing: .5px;
+      }
+
+      .secure-badge {
+        padding: 8px 9px;
+        font-size: 8px;
+      }
+
+      .account-section {
+        padding: 25px 15px;
+        gap: 10px;
+      }
+
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .auth-banner {
+        padding: 22px 16px;
+      }
+
+      .auth-mark {
+        width: 39px;
+        height: 39px;
+      }
+
+      .login-panel {
+        padding: 24px 14px;
+      }
+
+      .selection-card {
+        padding: 17px 12px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+      }
+
+      .selection-card-top {
+        align-items: flex-start;
+        margin-bottom: 18px;
+      }
+
+      .selection-card-title {
+        font-size: 15px;
+      }
+
+      #selected-count {
+        font-size: 10px;
+        padding: 8px 10px;
+      }
+
+      .password-preview {
+        gap: 10px;
+        flex-wrap: nowrap;
+      }
+
+      .preview-slot {
+        width: min(27vw, 112px);
+        height: auto;
+        aspect-ratio: 1;
+        flex: 0 1 112px;
+        border-radius: 14px;
+      }
+
+      .slot-number {
+        top: 5px;
+        left: 5px;
+        min-width: 23px;
+        padding: 4px 5px;
+        font-size: 9px;
+      }
+
+      .gallery-intro {
+        margin-bottom: 20px;
+      }
+
+      .gallery-intro p {
+        font-size: 12px;
+      }
+
+      .gallery-topline {
+        padding-top: 15px;
+      }
+
+      .login-image-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 7px;
+      }
+
+      .image-box {
+        border-radius: 8px;
+      }
+
+      .footer {
+        font-size: 7px;
+        letter-spacing: .4px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .password-preview {
+        gap: 7px;
+      }
+
+      .preview-slot {
+        width: 27vw;
+        flex-basis: 27vw;
+      }
+
+      .selection-card-top {
+        flex-direction: column;
+      }
+    }
+  </style>
+  
+</head>
+
+<body>
+  <main class="page">
+
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-mark">GS</div>
+        <span>Graphical Security</span>
+      </div>
+
+      <div class="top-meta">
+        VISUAL AUTHENTICATION SYSTEM<br>
+        INTERFACE / 001
+      </div>
+    </div>
+
+    <div class="main-card">
+
+      <header class="hero">
+        <div class="eyebrow">A different way to authenticate</div>
+
+        <h1 class="hero-heading">
+          Your Pattern.<br>
+          Your Protection.
+        </h1>
+
+        <p class="hero-description">
+          Your images create a personal key. Follow your familiar
+          sequence to access your account.
+        </p>
+
+        <div class="image-frame">
+          <div class="hero-grid">
+            <div class="hero-tile">
+              <img src="images/2.webp" alt="Image preview 01">
+              <span class="tile-number">01</span>
+            </div>
+
+            <div class="hero-tile">
+              <img src="images/16.webp" alt="Image preview 02">
+              <span class="tile-number">02</span>
+            </div>
+
+            <div class="hero-tile">
+              <img src="images/46.webp" alt="Image preview 03">
+              <span class="tile-number">03</span>
+            </div>
+
+            <div class="hero-tile">
+              <img src="images/11.webp" alt="Image preview 04">
+              <span class="tile-number">04</span>
+            </div>
+
+            <div class="hero-tile">
+              <img src="images/8.webp" alt="Image preview 05">
+              <span class="tile-number">05</span>
+            </div>
+
+            <div class="hero-tile">
+              <img src="images/35.webp" alt="Image preview 06">
+              <span class="tile-number">06</span>
+            </div>
+
+            <div class="hero-tile">
+              <img src="images/19.webp" alt="Image preview 07">
+            </div>
+
+            <div class="hero-tile">
+              <img src="images/13.webp" alt="Image preview 08">
+              <span class="tile-number">08</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="image-caption">
+          <span>Image-based identity</span>
+
+          <div class="secure-badge">
+            <span class="badge-dot"></span>
+            <span>SECURE LOGIN</span>
+          </div>
+        </div>
+
+        </header>
+
+        <form id="login-form">
+
+        <section class="account-section">
+          <div class="account-content">
+
+            <div class="section-index">Account verification / 01</div>
+            <h2 class="account-title">Enter your details</h2>
+
+            <p class="account-description">
+              Identify your account before continuing to image-based authentication.
+            </p>
+
+            <div class="field-grid">
+
+              <div class="field-card">
+                <div class="field-heading">
+                  <label for="username">01 / IDENTITY</label>
+                  <span class="field-number">OPTIONAL</span>
+                </div>
+
+                <div class="input-wrap">
+                  <span class="input-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <circle cx="12" cy="8" r="3.5"></circle>
+                      <path d="M5 20c.5-4 3-6 7-6s6.5 2 7 6"></path>
+                    </svg>
+                </span>
+                   <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter username"
+                    autocomplete="off">
+                </div>
+              </div>
+
+              <div class="field-card">
+                <div class="field-heading">
+                  <label for="email">02 / CONTACT</label>
+                  <span class="field-number">REQUIRED</span>
+                </div>
+
+                <div class="input-wrap">
+                  <span class="input-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <rect x="3" y="5" width="18" height="14" rx="1"></rect>
+                      <path d="m4 7 8 6 8-6"></path>
+                    </svg>
+                  </span>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter email address"
+                    autocomplete="off"
+                    required>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="account-note">
+              <span class="note-symbol">i</span>
+              <span>
+                Your account details help identify your profile.
+                Your selected image sequence is used for graphical authentication.
+              </span>
+            </div>
+          </div>
+
+        </section>
+
+        <section class="auth-banner">
+          <div>
+            <div class="auth-index">01 / AUTHENTICATION</div>
+            <h2 class="auth-title">Choose Your Secret Images</h2>
+            <p class="auth-description">
+              Your image sequence is your personal key. Order matters.
+            </p>
+          </div>
+
+          <div class="auth-mark" aria-hidden="true">
+            <span>01</span>
+          </div>
+          </section>
+
+        <section class="login-panel">
+
+          <div class="login-heading">
+            <div class="section-index">02 / GRAPHICAL PASSWORD</div>
+            <h2 class="account-title">Create Your Visual Passcode</h2>
+
+            <p class="account-description">
+              Select three unique images in the order only you remember.
+              Your sequence is used to verify your identity.
+            </p>
+          </div>
+
+          <div class="selection-card">
+            <div class="selection-card-top">
+              <div>
+                <h3 class="selection-card-title">Your secret sequence</h3>
+                <p class="selection-card-subtitle">
+                  Choose 3 images in order. Tap a selected image again to remove it.
+                </p>
+              </div>
+              <span id="selected-count" aria-live="polite">
+                Selected: 0 / 3
+              </span>
+            </div>
+
+            <div
+              id="password-preview"
+              class="password-preview"
+              aria-label="Selected image sequence">
+            </div>
+          </div>
+
+          <div class="gallery-intro">
+            <span class="section-label">YOUR PERSONAL SECURITY KEY</span>
+
+            <h3>Every Image Tells a Secret.</h3>
+
+            <p>
+              Explore your image collection and choose a sequence that
+              feels familiar to you. The order of your three selections
+              matters during sign-in.
+            </p>
+          </div>
+
+          <div class="gallery-topline">
+            <span class="field-number">IMAGE COLLECTION</span>
+
+            <div class="gallery-topline">
+            <span class="field-number">IMAGE COLLECTION</span>
+            <span class="field-number">50 IMAGE OPTIONS</span>
+          </div>
+
+          <div
+            id="image-grid"
+            class="login-image-grid"
+            aria-label="Available secret images">
+          </div>
+
+          <p id="message" role="status" aria-live="polite"></p>
+
+          <button id="login-btn" type="submit">
+            Login Securely →
+          </button>
+
+          <a class="forgot-link" href="forgot-password.html">
+            Forgot your graphical password?
+          </a>
+
+        </section>
+      </form>
+    </div>
+
+    <footer class="footer">
+      <span>Graphical Security System</span>
+      <span>Designed for visual authentication</span>
+    </footer>
+  </main>
+
+  <script src="login.js"></script>
+</body>
+</html>
