@@ -1,4 +1,4 @@
-Graphical Password Authentication System
+## Graphical Password Authentication System
 
 A web-based authentication system that uses an exact sequence of selected images as a graphical password instead of a traditional text-based password.
 
