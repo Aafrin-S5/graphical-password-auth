@@ -1,6 +1,6 @@
 Graphical Password Authentication System
 
-A web-based authentication system that uses a exact sequence of selected images as a graphical password instead of a traditional text-based password.
+A web-based authentication system that uses an exact sequence of selected images as a graphical password instead of a traditional text-based password.
 
 The project combines a web interface with a Python FastAPI backend and MySQL database to demonstrate image-sequence-based authentication.
 
@@ -37,17 +37,17 @@ It mitigates brute-force attacks through temporary account lockout after three c
 - Integrate the application with a MySQL database.
 - Keep frontend pages and backend logic organized separately.
 
-🔗 Technology Stack
+## Technology Stack
 
-HTML5| Page structure
-CSS3| Styling and responsive interface
-JavaScript| Image selection and API requests
-Python| Backend programming
-FastAPI| REST API development
-MySQL| User data storage
-WebP| Optimized image format
-Git and GitHub| Version control and project hosting
-
+- **HTML5** — Page structure
+- **CSS3** — Styling and responsive layout
+- **JavaScript** — Image selection and API requests
+- **Python** — Backend programming
+- **FastAPI** — REST API development
+- **MySQL** — User data storage
+- **WebP** — Image optimization
+- **Git and GitHub** — Version control and repository hosting
+  
 🔗 Project Structure
 
 graphical-password-auth/
@@ -68,7 +68,9 @@ graphical-password-auth/
 │   └── style.css
 ├── schema.sql
 ├── README.md
-└── .gitignore
+├── .gitignore
+└── LICENSE
+
 
 🔗 Prerequisites
 
@@ -82,38 +84,35 @@ Before running the project, install:
 
 🔗 How to Run
 
- 1- Clone the Repository
+1- Clone the Repository
 
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone https://github.com/Aafrin-S5/graphical-password-auth.git
 cd graphical-password-auth
-
 
 2- Set Up the Python Environment
 
-Open a terminal in the project directory:
-
 cd backend
 python -m venv venv
-
-Activate the environment on Windows PowerShell:
-
 .\venv\Scripts\Activate.ps1
 
+Install the required backend packages:
 
-5- Configure Environment Variables
+python -m pip install fastapi uvicorn mysql-connector-python python-dotenv
 
-Create a ".env" file inside the "backend" directory and configure the database settings expected by "main.py".
+3- Configure Environment Variables
 
-Never upload database passwords or other secrets to GitHub.
+Create a .env file inside the backend/ directory. Add the database configuration variables expected by main.py.
 
-🔗 5. Set Up the MySQL Database
+Never commit .env files or expose database credentials publicly.
+
+🔗 4. Set Up the MySQL Database
 
 1. Open MySQL Workbench.
 2. Connect to your local MySQL server.
 3. Execute the SQL statements in "schema.sql".
 4. Ensure the database name and table structure match the backend configuration.
 
-🔗 6. Start the FastAPI Backend
+🔗 5. Start the FastAPI Backend
 
 From the "backend" directory, run:
 
@@ -123,9 +122,9 @@ Open the API documentation:
 
 http://127.0.0.1:8001/docs
 
-🔗 7. Open the Frontend
+🔗 6. Open the Frontend
 
-Use the configured development server or local web server to open the frontend. Ensure the frontend API URL matches the backend address and port.
+Open the frontend using a local web server or the development setup supported by the project. Ensure the frontend API URL matches the backend address and port.
 
 
 🔗 Security Considerations
@@ -142,4 +141,6 @@ Use the configured development server or local web server to open the frontend. 
 
 🔗 License
 
-License information for the source code and image assets will be documented after their reuse permissions have been verified.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+Note: Verify that the image assets are also permitted for redistribution; the source-code license does not automatically establish their licensing terms.
