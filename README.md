@@ -50,6 +50,7 @@ It mitigates brute-force attacks through temporary account lockout after three c
   
 🔗 Project Structure
 
+```text
 graphical-password-auth/
 ├── backend/
 │   └── main.py
@@ -68,9 +69,8 @@ graphical-password-auth/
 │   └── style.css
 ├── schema.sql
 ├── README.md
-├── .gitignore
-└── LICENSE
-
+└── .gitignore
+```
 
 🔗 Prerequisites
 
