@@ -18,7 +18,7 @@ It mitigates brute-force attacks through temporary account lockout after three c
 ##🔗 Image Optimization and Performance
       
 - Optimized all images before commiting.
-- Maximum file size:200KB for photos,100KB for screenshots
+- Maximum file size: 200KB for photos,100KB for screenshots
 - Converted authentication images to WebP format.
 - Optimized image assets to support optimal website loading.
 
