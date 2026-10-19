@@ -15,7 +15,7 @@ It mitigates brute-force attacks through temporary account lockout after three c
 - Authenticate users by selecting the same images in the registered order.
 - Provide a visual interface for image selection.
 
-##🔗 Image Optimization and Performance
+🔗 Image Optimization and Performance
       
 - Optimized all images before commiting.
 - Maximum file size: 200KB for photos,100KB for screenshots
